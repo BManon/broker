@@ -6,4 +6,8 @@ export class OffersService {
   findAllOffers(requestOffersDto: RequestOffersDto) {
 
   }
+
+  acceptOffer(offer_id: string) {
+    return undefined;
+  }
 }

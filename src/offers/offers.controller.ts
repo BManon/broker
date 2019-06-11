@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { OffersService } from './offers.service';
 import { RequestOffersDto } from './dto/request-offers-dto';
 
@@ -13,6 +13,12 @@ export class OffersController {
   async findAllOffers(@Body() requestOffersDto: RequestOffersDto) {
 
     return this.offersService.findAllOffers(requestOffersDto);
+  }
+
+  @Post(':offer_id/accept')
+  async acceptOffer(@Param('offer_id') offer_id: string) {
+
+    return this.offersService.acceptOffer(offer_id)
   }
 
 
