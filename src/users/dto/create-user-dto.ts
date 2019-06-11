@@ -1,47 +1,7 @@
 import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Max, Min, ValidateNested } from 'class-validator';
 import { ApiModelProperty } from '@nestjs/swagger';
-
-
-enum Qualification {
-  ISO9001,
-  ISO14001,
-  ISO10303
-}
-
-enum Role {
-  PRODUCTION,
-  TRANSPORT
-}
-
-enum Ability {
-  ASSEMBLY_ASSISTANT,
-  TRANSPORT_COOLING
-}
-
-class Address {
-  @ApiModelProperty()
-  @IsString()
-  @IsNotEmpty()
-  readonly street: string;
-
-  @ApiModelProperty()
-  @Min(0)
-  @IsNotEmpty()
-  @IsInt()
-  readonly number: number;
-
-  @ApiModelProperty()
-  @Min(0)
-  @Max(99999)
-  @IsNotEmpty()
-  @IsInt()
-  readonly postal_code: number;
-
-  @ApiModelProperty()
-  @IsString()
-  @IsNotEmpty()
-  readonly city: string;
-}
+import { CommonAddressDto } from '../../common/dto/common-address-dto';
+import { Ability, Machine, Qualification, Role } from '../../common/common_enums';
 
 export class CreateUserDto {
   @ApiModelProperty()
@@ -62,7 +22,11 @@ export class CreateUserDto {
   @ApiModelProperty()
   @ValidateNested()
   @IsNotEmpty()
-  readonly company_address: Address;
+  readonly company_address: CommonAddressDto;
+
+  @ApiModelProperty({enum: Object.keys(Machine).filter(k => Number.isNaN(parseInt(k)))})
+  @IsArray()
+  readonly machines: Machine[];
 
   @ApiModelProperty({enum: Object.keys(Qualification).filter(k => Number.isNaN(parseInt(k)))})
   @IsArray()

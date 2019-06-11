@@ -2,7 +2,7 @@ import { IsArray, IsDate, IsDateString, IsInt, IsNotEmpty, Max, Min } from 'clas
 import { ApiModelProperty } from '@nestjs/swagger';
 
 
-class Discount {
+class DiscountDto {
 
   @ApiModelProperty({format:'date'})
   @IsDateString()
@@ -23,8 +23,8 @@ export class UpdateCapacitiesDto {
   @IsNotEmpty()
   readonly default_price: number;
 
-  @ApiModelProperty({ type: [Discount] })
+  @ApiModelProperty({ type: [DiscountDto] })
   @IsNotEmpty()
   @IsArray()
-  readonly discounts: Discount[];
+  readonly discounts: DiscountDto[];
 }
