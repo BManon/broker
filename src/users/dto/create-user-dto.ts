@@ -1,4 +1,4 @@
-import { IsArray, IsEnum, IsNotEmpty, IsOptional, IsString, Max, Min, ValidateNested } from 'class-validator';
+import { IsArray, IsEnum, IsInt, IsNotEmpty, IsOptional, IsString, Max, Min, ValidateNested } from 'class-validator';
 import { ApiModelProperty } from '@nestjs/swagger';
 
 
@@ -27,12 +27,14 @@ class Address {
   @ApiModelProperty()
   @Min(0)
   @IsNotEmpty()
+  @IsInt()
   readonly number: number;
 
   @ApiModelProperty()
   @Min(0)
   @Max(99999)
   @IsNotEmpty()
+  @IsInt()
   readonly postal_code: number;
 
   @ApiModelProperty()
